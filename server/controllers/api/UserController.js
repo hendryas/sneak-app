@@ -1,10 +1,45 @@
 const { user } = require('../../models');
+const { encryptPwd, decryptPwd } = require("../../helpers/bcrypt");
+const { encodeToken } = require("../../helpers/jwt");
 
-class User {
+class UserController {
     static async getDataUser(req, res) {
         try {
             let result = await user.findAll();
             res.status(200).json(result);
+        } catch (error) {
+            res.status(500).json(error);
+        }
+    }
+
+    static async createAccountCustomer(req, res) {
+        try {
+            const image = 'default-customer.png';
+            const { name, email, password } = req.body;
+            let role_id = 3;
+            let is_active = 0;
+
+            let findEmail = await user.findOne({
+                where: {
+                    email,
+                },
+            });
+
+            if (!findEmail) {
+                let result = await user.create({
+                    name,
+                    email,
+                    password: encryptPwd(password),
+                    image,
+                    role_id,
+                    is_active
+                });
+                res.status(201).json(result);
+            } else {
+                res.status(400).json({
+                    message: `Nama Email ini Sudah Pernah diBuat!`,
+                });
+            }
         } catch (error) {
             res.status(500).json(error);
         }
@@ -37,14 +72,6 @@ class User {
             res.status(500).json(error);
         }
     }
-
-    // static async createAccountCustomer(req, res){
-    //     try {
-
-    //     } catch (error) {
-    //         res.status(500).json(error);
-    //     }
-    // }
 
     static async updateAccountAdmin(req, res) {
         try {
@@ -170,4 +197,4 @@ class User {
     }
 }
 
-module.exports = User;
+module.exports = UserController;

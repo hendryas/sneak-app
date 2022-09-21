@@ -6,7 +6,9 @@ class Rekening {
         try {
             let dataBank = await bank.findAll();
             let result = await rekening.findAll();
-            res.status(200).json(result, dataBank);
+            res.status(200).json({
+                result, dataBank
+            });
         } catch (error) {
             res.status(500).json(error);
         }

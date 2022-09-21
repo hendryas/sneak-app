@@ -1,8 +1,23 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import 'datatables.net-bs4';
+import React, { useState } from "react";
+import { createNavigation } from '../../../axios/navigationAxios'
+import {
+    Link,
+    useNavigate
+} from "react-router-dom";
 
 const NavigationMaster = () => {
+    const [form, setForm] = useState({
+        title: "",
+        icon: ""
+    })
+
+    const navigation = useNavigate();
+
+    const submitHandler = () => {
+        createNavigation(form);
+        navigation('/navigationmaster');
+    }
+
     return (
         <>
             <div className="wrapper">
@@ -31,9 +46,11 @@ const NavigationMaster = () => {
                                 <p className="text-muted m-b-30 font-14">
                                     Menu ini untuk menambahkan navigation bagi tampilan di user.
                                 </p>
+
                                 <Link to="#" className="btn btn-primary waves-effect waves-light mb-3" data-toggle="modal" data-target="#newTambahNavigation">Tambah Navigation</Link>
+
                                 <div className="table-responsive">
-                                    <table id="datatable" className="table table-bordered dt-responsive nowrap" style={{ borderCollapse: 'collapse', borderSpacing: 0, width: '100%' }}>
+                                    <table className="datatable table table-bordered dt-responsive nowrap" style={{ borderCollapse: 'collapse', borderSpacing: 0, width: '100%' }}>
                                         <thead className="text-center">
                                             <tr>
                                                 <th>#</th>
@@ -43,6 +60,12 @@ const NavigationMaster = () => {
                                             </tr>
                                         </thead>
                                         <tbody className="text-center">
+                                            <tr>
+                                                <td>1</td>
+                                                <td>12</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -62,26 +85,26 @@ const NavigationMaster = () => {
                                 <span aria-hidden="true">×</span>
                             </button>
                         </div>
-                        <form action="" method="POST">
+                        <div>
                             <div className="modal-body">
                                 <div className="form-group">
                                     <label htmlFor="title">Title</label>
                                     <div className="input-group">
-                                        <input type="text" className="form-control" autoComplete="off" placeholder="Contoh : Home" name="title" required />
+                                        <input onChange={(e) => setForm({ ...form, title: e.target.value })} type="text" className="form-control" autoComplete="off" placeholder="Contoh : Home" required />
                                     </div>
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="icon">Icon</label>
                                     <div className="input-group">
-                                        <input type="text" className="form-control" autoComplete="off" placeholder="Contoh : fa-home" name="icon" required />
+                                        <input onChange={(e) => setForm({ ...form, icon: e.target.value })} type="text" className="form-control" autoComplete="off" placeholder="Contoh : fa-home" required />
                                     </div>
                                 </div>
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" className="btn btn-primary">Tambah</button>
+                                <button onClick={() => submitHandler()} className="btn btn-primary">Tambah</button>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>

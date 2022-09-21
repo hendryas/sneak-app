@@ -46,6 +46,17 @@
     href="%PUBLIC_URL%/assets/drixo/app-assets/template/drixo_custom/assets/css/main.css">
   <!-- End Style Drixo Custom -->
 
+
+  <!-- DataTables -->
+  <link href="%PUBLIC_URL%/assets/drixo/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet"
+    type="text/css">
+  <link href="%PUBLIC_URL%/assets/drixo/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css">
+
+  <!-- Responsive datatable examples -->
+  <link href="%PUBLIC_URL%/assets/drixo/plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet"
+    type="text/css">
+
+
   <!-- End Assets for Dashboard/Home -->
 
   <title>React App</title>
@@ -84,6 +95,33 @@
 
   <!-- App js -->
   <script src="%PUBLIC_URL%/assets/drixo/js/app.js"></script>
+
+  <!-- Required datatable js -->
+  <script src="%PUBLIC_URL%/assets/drixo/plugins/datatables/jquery.dataTables.min.js"></script>
+  <script src="%PUBLIC_URL%/assets/drixo/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+
+  <!-- Buttons examples -->
+  <script src="%PUBLIC_URL%/assets/drixo/plugins/datatables/dataTables.buttons.min.js"></script>
+  <script src="%PUBLIC_URL%/assets/drixo/plugins/datatables/buttons.bootstrap4.min.js"></script>
+  <script src="%PUBLIC_URL%/assets/drixo/plugins/datatables/jszip.min.js"></script>
+  <script src="%PUBLIC_URL%/assets/drixo/plugins/datatables/pdfmake.min.js"></script>
+  <script src="%PUBLIC_URL%/assets/drixo/plugins/datatables/vfs_fonts.js"></script>
+  <script src="%PUBLIC_URL%/assets/drixo/plugins/datatables/buttons.html5.min.js"></script>
+  <script src="%PUBLIC_URL%/assets/drixo/plugins/datatables/buttons.print.min.js"></script>
+  <script src="%PUBLIC_URL%/assets/drixo/plugins/datatables/buttons.colVis.min.js"></script>
+
+  <!-- Responsive examples -->
+  <script src="%PUBLIC_URL%/assets/drixo/plugins/datatables/dataTables.responsive.min.js"></script>
+  <script src="%PUBLIC_URL%/assets/drixo/plugins/datatables/responsive.bootstrap4.min.js"></script>
+
+  <!-- Datatable init js -->
+  <script src="%PUBLIC_URL%/assets/drixo/pages/datatables.init.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      $('.datatable').DataTable();
+    });
+  </script>
 
   <!-- End Assets for Dashboard/Home -->
 </body>

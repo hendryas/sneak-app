@@ -1,9 +1,9 @@
-const { navigation } = require('../../models');
+const { carousel } = require('../../models');
 
-class Navigation {
-    static async getDataNavigation(req, res) {
+class CarouselController {
+    static async getDataCarousel(req, res) {
         try {
-            let result = await navigation.findAll();
+            let result = await carousel.findAll();
             res.status(200).json(result);
         } catch (error) {
             res.status(500).json(error);
@@ -12,9 +12,9 @@ class Navigation {
 
     static async create(req, res) {
         try {
-            const { title, icon } = req.body;
-            let result = await navigation.create({
-                title, icon
+            const { color, title, image } = req.body;
+            let result = await carousel.create({
+                color, title, image
             })
             res.status(201).json(result);
         } catch (error) {
@@ -25,19 +25,19 @@ class Navigation {
     static async update(req, res) {
         try {
             const id = +req.params.id;
-            const { title, icon } = req.body;
-            let result = await navigation.update({
-                title, icon
+            const { color, title, image } = req.body;
+            let result = await carousel.update({
+                color, title, image
             }, {
                 where: { id }
             })
             if (result == 1) {
                 res.status(201).json({
-                    message: `Data Navigation dengan ID: ${id} berhasil di Update!`
+                    message: `Data Carousel dengan ID: ${id} berhasil di Update!`
                 });
             } else {
                 res.status(404).json({
-                    message: `Data Navigation dengan ID: ${id} tidak ditemukan!`
+                    message: `Data Carousel dengan ID: ${id} tidak ditemukan!`
                 })
             }
         } catch (error) {
@@ -48,15 +48,15 @@ class Navigation {
     static async delete(req, res) {
         try {
             const id = +req.params.id;
-            let result = await navigation.destroy({
+            let result = await carousel.destroy({
                 where: { id }
             })
             result === 1 ?
                 res.status(200).json({
-                    message: `Data Navigation dengan ID: ${id} berhasil di hapus!`
+                    message: `Data Carousel dengan ID: ${id} berhasil di hapus!`
                 }) :
                 res.status(404).json({
-                    message: `Data Navigation dengan ID: ${id} tidak ditemukan!`
+                    message: `Data Carousel dengan ID: ${id} tidak ditemukan!`
                 })
         } catch (error) {
             res.status(500).json(error);
@@ -64,4 +64,4 @@ class Navigation {
     }
 }
 
-module.exports = Navigation;
+module.exports = CarouselController;

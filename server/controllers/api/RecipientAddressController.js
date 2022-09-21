@@ -1,9 +1,9 @@
-const { recipientaddress } = require('../../models');
+const { recipient_address } = require('../../models');
 
 class RecipientAddress {
     static async getDataRecipientAddress(req, res) {
         try {
-            let result = await recipientaddress.findAll();
+            let result = await recipient_address.findAll();
             res.status(200).json(result);
         } catch (error) {
             res.status(500).json(error);
@@ -13,10 +13,18 @@ class RecipientAddress {
     static async getDataRecipientAddressByUserId(req, res) {
         try {
             const { user_id } = req.body;
-            let result = await recipientaddress.findByPk({
+            console.log(user_id);
+            let result = await recipient_address.findOne({
                 where: { user_id }
             })
-            res.status(200).json(result);
+            if (result == 1) {
+                res.status(200).json(result);
+            } else {
+                res.status(404).json({
+                    message: `Data Alamat Penerima dengan USER ID: ${user_id} tidak ditemukan!`
+                })
+            }
+
         } catch (error) {
             res.status(500).json(error);
         }
@@ -25,7 +33,7 @@ class RecipientAddress {
     static async create(req, res) {
         try {
             const { user_id, address, name, no_phone, street_name, pinpoint, postal_code, additional_details } = req.body;
-            let result = await recipientaddress.create({
+            let result = await recipient_address.create({
                 user_id, address, name, no_phone, street_name, pinpoint, postal_code, additional_details
             })
             res.status(201).json(result);
@@ -38,7 +46,7 @@ class RecipientAddress {
         try {
             const id = +req.params.id;
             const { user_id, address, name, no_phone, street_name, pinpoint, postal_code, additional_details } = req.body;
-            let result = await recipientaddress.update({
+            let result = await recipient_address.update({
                 user_id, address, name, no_phone, street_name, pinpoint, postal_code, additional_details
             }, {
                 where: { id }
@@ -60,7 +68,7 @@ class RecipientAddress {
     static async delete(req, res) {
         try {
             const id = +req.params.id;
-            let result = await recipientaddress.destroy({
+            let result = await recipient_address.destroy({
                 where: { id }
             })
             result === 1 ?

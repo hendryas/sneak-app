@@ -1,10 +1,9 @@
-const { bank } = require('../../models');
-var randomstring = require("randomstring");
+const { status_payment } = require('../../models');
 
-class BankController {
-    static async getDataBank(req, res) {
+class StatusPaymentController {
+    static async getDataStatusPayment(req, res) {
         try {
-            let result = await bank.findAll();
+            let result = await status_payment.findAll();
             res.status(200).json(result);
         } catch (error) {
             res.status(500).json(error);
@@ -13,10 +12,9 @@ class BankController {
 
     static async create(req, res) {
         try {
-            const { nama_bank } = req.body;
-            const kode = randomstring.generate(10).toUpperCase();
-            let result = await bank.create({
-                kode, nama_bank
+            const { payment_status } = req.body;
+            let result = await status_payment.create({
+                payment_status
             })
             res.status(201).json(result);
         } catch (error) {
@@ -27,20 +25,19 @@ class BankController {
     static async update(req, res) {
         try {
             const id = +req.params.id;
-            const { nama_bank } = req.body;
-            let result = await bank.update({
-                nama_bank
+            const { payment_status } = req.body;
+            let result = await status_payment.update({
+                payment_status
             }, {
                 where: { id }
             })
-
             if (result == 1) {
                 res.status(201).json({
-                    message: `Data Bank dengan ID: ${id} berhasil di Update!`
+                    message: `Data Status Pembayaran dengan ID: ${id} berhasil di Update!`
                 });
             } else {
                 res.status(404).json({
-                    message: `Data Bank dengan ID: ${id} tidak ditemukan!`
+                    message: `Data Status Pembayaran dengan ID: ${id} tidak ditemukan!`
                 })
             }
         } catch (error) {
@@ -51,15 +48,15 @@ class BankController {
     static async delete(req, res) {
         try {
             const id = +req.params.id;
-            let result = await bank.destroy({
+            let result = await status_payment.destroy({
                 where: { id }
             })
             result === 1 ?
                 res.status(200).json({
-                    message: `Data Bank dengan ID: ${id} berhasil di hapus!`
+                    message: `Data Status Pembayaran dengan ID: ${id} berhasil di hapus!`
                 }) :
                 res.status(404).json({
-                    message: `Data Bank dengan ID: ${id} tidak ditemukan!`
+                    message: `Data Status Pembayaran dengan ID: ${id} tidak ditemukan!`
                 })
         } catch (error) {
             res.status(500).json(error);
@@ -67,4 +64,4 @@ class BankController {
     }
 }
 
-module.exports = BankController;
+module.exports = StatusPaymentController;
