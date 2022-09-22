@@ -33,4 +33,7 @@ route.use('/api/statuspayments', statusPaymentRoutes);
 const userRoutes = require('./user');
 route.use('/api/users', userRoutes);
 
+const productRoutes = require('./product');
+route.use('/api/products', productRoutes);
+
 module.exports = route;

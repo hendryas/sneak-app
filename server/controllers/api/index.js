@@ -7,6 +7,7 @@ const RecipientAddressController = require('../api/RecipientAddressController');
 const RoleController = require('../api/RoleController');
 const StatusPaymentController = require('../api/StatusPaymentController');
 const UserController = require('../api/UserController');
+const ProductController = require('../api/ProductController');
 
 module.exports = {
     BankController,
@@ -17,5 +18,6 @@ module.exports = {
     RecipientAddressController,
     RoleController,
     StatusPaymentController,
-    UserController
+    UserController,
+    ProductController
 }
